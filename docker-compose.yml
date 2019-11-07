@@ -1,16 +1,27 @@
-version: '3.5'
+version: '3.7'
 
 services:
   rabbit:
     container_name: rabbitmq
     image: rabbitmq:3.7.17-alpine
+    restart: always
+    build:
+      context: .
+      dockerfile: ./Dockerfile
     ports:
       - "15672:15672"
       - "5672:5672"
+    volumes:
+      - ./data:/var/lib/rabbitmq:delegated
+      - ./data/logs:/var/log/rabbitmq:delegated
+    environment:
+      - RABBITMQ_DEFAULT_USER:guest
+      - RABBITMQ_DEFAULT_PASS:guest
+      - RABBITMQ_DEFAULT_VHOST:vhost
     networks:
-      - rabbitmq
+      - carlonicora
 
 networks:
-  rabbitmq:
-    external:
-      name: rabbitmq
+  carlonicora:
+    driver: bridge
+    name: carlonicora
