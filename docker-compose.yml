@@ -3,7 +3,7 @@ version: '3.7'
 services:
   rabbit:
     container_name: rabbitmq
-    image: rabbitmq:3.7.17-alpine
+    image: carlonicora/rabbitmq:3.8.1-alpine
     restart: always
     build:
       context: .
@@ -11,17 +11,13 @@ services:
     ports:
       - "15672:15672"
       - "5672:5672"
-    volumes:
-      - ./data:/var/lib/rabbitmq:delegated
-      - ./data/logs:/var/log/rabbitmq:delegated
     environment:
-      - RABBITMQ_DEFAULT_USER:guest
-      - RABBITMQ_DEFAULT_PASS:guest
-      - RABBITMQ_DEFAULT_VHOST:vhost
+      - RABBITMQ_DEFAULT_USER=guest
+      - RABBITMQ_DEFAULT_PASS=guest
     networks:
-      - carlonicora
+      - default_network
 
 networks:
-  carlonicora:
+  default_network:
     driver: bridge
-    name: carlonicora
+    name: phlow
