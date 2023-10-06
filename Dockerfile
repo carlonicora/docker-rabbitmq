@@ -1,7 +1,7 @@
-FROM rabbitmq:3.8.1-alpine
+FROM rabbitmq:3.12-alpine
 
 RUN apk update \
-    && apk add --no-cache curl g++ make autoconf bash python
+    && apk add --no-cache curl g++ make autoconf bash python3
 
 RUN rabbitmq-plugins enable rabbitmq_management
 

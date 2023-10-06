@@ -1,9 +1,9 @@
-version: '3.7'
+version: "3.9"
 
 services:
   rabbit:
     container_name: rabbitmq
-    image: carlonicora/rabbitmq:3.8.1-alpine
+    image: carlonicora/rabbitmq:3.8-alpine
     restart: always
     build:
       context: .
@@ -20,4 +20,5 @@ services:
 networks:
   default_network:
     driver: bridge
-    name: phlow
+    name: carlonicora
+    external: true
